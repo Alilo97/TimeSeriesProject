@@ -5,7 +5,7 @@ from pandas import DataFrame
 from pandas import concat
 from sklearn.metrics import mean_absolute_error
 from xgboost import XGBRegressor
-from matplotlib import pyplot
+from matplotlib import pyplot			
 
 # transform a time series dataset into a supervised learning dataset
 def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
@@ -65,16 +65,10 @@ def walk_forward_validation(data, n_test):
 	error = mean_absolute_error(test[:, -1], predictions)
 	return error, test[:, -1], predictions
 
-# load the dataset
-series = read_csv(r'C:\Users\abouy\Desktop\Final Project\Data\Amprion.csv', header=0, index_col=0)
-values = series.values
-# transform the time series data into supervised learning
-data = series_to_supervised(values, n_in=20) #n_in is the number of previous elements used to predicted a missing value
-# evaluate
-mae, y, yhat = walk_forward_validation(data, 20)
-print('MAE: %.3f' % mae)
-# plot expected vs preducted
-pyplot.plot(y, label='Actual')
-pyplot.plot(yhat, label='Predicted')
-pyplot.legend()
-pyplot.show()
+def predict_data(series):
+    values = series.values
+    # transform the time series data into supervised learning
+    data = series_to_supervised(values, n_in=7) #n_in is the number of previous elements used to predicted a missing value
+    # evaluate
+    mae, y, yhat = walk_forward_validation(data, int(len(data) * 0.25))
+    return mae, y, yhat
