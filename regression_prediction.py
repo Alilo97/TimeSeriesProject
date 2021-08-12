@@ -9,6 +9,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error
 import random
 
+
 def remove_random_indexes(df, num):
     size_x, size_y = df.shape
     result = np.empty(num, dtype=tuple)
@@ -17,9 +18,10 @@ def remove_random_indexes(df, num):
         df.iloc[result[i]] = np.NAN
     return result
 
+
 def predict_data(df):
-    # Choose 25% of the index positions at random
-    idx_miss = np.random.randint(0, high=len(df), size=int(len(df)*.25))
+    # Choose % of the index positions at random
+    idx_miss = np.random.randint(0, high=len(df), size=int(len(df) * 0.25))
 
     # Create response indicator matrix
     R = ~df.index.isin(idx_miss)
@@ -37,7 +39,7 @@ def predict_data(df):
     # Calculate residuals, variance and noise vector from residual distr.
     residuals = observed.values - lrg.predict(observed.index.values.reshape(-1, 1))
     variance = residuals.var()
-    rnoise = np.random.normal(0,np.sqrt(variance), len(imputations)).reshape(-1, 1)
+    rnoise = np.random.normal(0, np.sqrt(variance), len(imputations)).reshape(-1, 1)
 
     # Add noise vector to predicton vector from regression model.
     simputations = imputations + rnoise

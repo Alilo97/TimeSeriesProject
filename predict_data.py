@@ -43,7 +43,6 @@ class EnumAction(argparse.Action):
 # ======================================================
 
 class PredictionMethod(enum.Enum):
-    MeanImputation = 'mean-imputation'
     RegressionImputation = 'regression-imputation'
     MultivariateRegressionImputation = 'multivariate-regression-imputation'
     XGBoost = 'xgboost'
@@ -75,6 +74,9 @@ def main():
     print('MAE: %.3f' % mae)
     # plot expected vs preducted
     pyplot.plot(y, label='Actual')
+    pyplot.legend()
+    pyplot.show()
+
     pyplot.plot(yhat, label='Predicted')
     pyplot.legend()
     pyplot.show()

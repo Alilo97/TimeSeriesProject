@@ -7,6 +7,7 @@ from xgboost import XGBRegressor
 from matplotlib import pyplot
 
 
+
 # transform a time series dataset into a supervised learning dataset
 def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
     n_vars = 1 if type(data) is list else data.shape[1]
@@ -40,6 +41,7 @@ def xgboost_forecast(train, testX):
     # fit model
     model = XGBRegressor(objective='reg:squarederror', n_estimators=1000)
     model.fit(trainX, trainy)
+
     # make a one-step prediction
     yhat = model.predict(asarray([testX]))
     return yhat[0]
@@ -73,10 +75,9 @@ def walk_forward_validation(data, n_test):
 series = read_csv(r'C:\Users\abouy\Desktop\TransnetBW.csv', header=0, index_col=0)
 values = series.values
 # transform the time series data into supervised learning
-data = series_to_supervised(values,
-                            n_in=20)  # n_in is the number of previous elements used to predicted a missing value
+data = series_to_supervised(values,  n_in=5)  # n_in is the number of previous elements used to predicted a missing value
 # evaluate
-mae, y, yhat = walk_forward_validation(data, 20)
+mae, y, yhat = walk_forward_validation(data, 20) #Number of data to predict
 print('MAE: %.3f' % mae)
 # plot expected vs preducted
 pyplot.plot(y, label='Actual')
