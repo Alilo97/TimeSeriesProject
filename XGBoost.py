@@ -72,7 +72,7 @@ def walk_forward_validation(data, n_test):
 
 
 # load the dataset
-series = read_csv(r'C:\Users\abouy\Desktop\TransnetBW.csv', header=0, index_col=0)
+series = read_csv(r'C:\Users\abouy\Desktop\Final Project\TimeSeriesProject\Data\TransnetBW.csv', header=0, index_col=0)
 values = series.values
 # transform the time series data into supervised learning
 data = series_to_supervised(values,  n_in=5)  # n_in is the number of previous elements used to predicted a missing value
