@@ -20,7 +20,7 @@ def remove_random_indexes(df, num):
 def predict_data(df):
     missing_df = df.copy()
 
-    missing_num = int(missing_df.size * 0.25)
+    missing_num = int(missing_df.size * 0.02)
     missing_idx = remove_random_indexes(missing_df, missing_num)
 
     actual_data = np.empty(missing_num)
