@@ -19,7 +19,7 @@ def remove_random_indexes(df, num):
 
 def predict_data(df):
     # Choose 25% of the index positions at random
-    idx_miss = np.random.randint(0, high=len(df), size=int(len(df)*.25))
+    idx_miss = np.random.randint(0, high=len(df), size=int(len(df)*.25)) #adjust the value for missing data
 
     # Create response indicator matrix
     R = ~df.index.isin(idx_miss)

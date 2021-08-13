@@ -70,5 +70,5 @@ def predict_data(series):
     # transform the time series data into supervised learning
     data = series_to_supervised(values, n_in=7) #n_in is the number of previous elements used to predicted a missing value
     # evaluate
-    mae, y, yhat = walk_forward_validation(data, int(len(data) * 0.25))
+    mae, y, yhat = walk_forward_validation(data, int(len(data) * 0.02))
     return mae, y, yhat

@@ -43,9 +43,8 @@ class EnumAction(argparse.Action):
 # ======================================================
 
 class PredictionMethod(enum.Enum):
-    MeanImputation = 'mean-imputation'
     RegressionImputation = 'regression-imputation'
-    MultivariateRegressionImputation = 'multivariate-regression-imputation'
+    MultivariateRegressionImputation = 'stochastic-regression-imputation'
     XGBoost = 'xgboost'
 
 def main():
